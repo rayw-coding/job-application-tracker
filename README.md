@@ -203,7 +203,7 @@ SQLite has no date type. Dates are stored as `YYYY-MM-DD` text, and timestamps a
 
 - There is no authentication. The server accepts connections on the machine's network interfaces. Run it locally and do not expose the port to an untrusted network.
 - The list endpoints return every matching row. There is no pagination.
-- An interview late in the evening in Hong Kong can already be the next UTC date.
+- Upcoming interviews use the UTC calendar date. Hong Kong is UTC+8, so in the early morning the UTC date can still be the previous day. An interview dated that previous day is still treated as upcoming until 08:00 Hong Kong time.
 - Node.js older than 22.13 cannot run the project.
 - A JSON body larger than the parser limit of 100 KB returns 413.
 - The process keeps one database connection open until it exits.
