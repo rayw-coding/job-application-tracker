@@ -16,6 +16,11 @@ function createApp(db) {
       return;
     }
 
+    if (err.type === "entity.too.large") {
+      res.status(413).json({ error: "Request body is too large" });
+      return;
+    }
+
     const invalidJson =
       err.type === "entity.parse.failed" ||
       (err instanceof SyntaxError && (err.status === 400 || err.statusCode === 400));

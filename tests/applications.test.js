@@ -106,6 +106,17 @@ test("creates an application", async () => {
   });
 });
 
+test("returns 413 when the JSON body exceeds the parser limit", async () => {
+  await withApi(async ({ base }) => {
+    const response = await request(base, "POST", "/applications", application({
+      company_name: "x".repeat(120000),
+    }));
+
+    assert.equal(response.status, 413);
+    assert.equal(response.body.error, "Request body is too large");
+  });
+});
+
 test("rejects a create request with missing required fields", async () => {
   await withApi(async ({ base }) => {
     const response = await request(base, "POST", "/applications", {
